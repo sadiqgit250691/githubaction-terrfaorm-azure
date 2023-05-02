@@ -8,12 +8,12 @@ terraform {
 }
 module "RG" {
   source   = "./modules/RG" #A
-  rgname   = var.rgname     #B
+  resource_group_name   = var.rgname     #B
   location = var.location
 }
 module "SA" {
   source   = "./modules/StorageAccount"
   sname    = var.sname
-  rgname   = module.RG.resourcegroup_name
+  resource_group_name   = module.RG.resourcegroup_name
   location = var.location
 }
