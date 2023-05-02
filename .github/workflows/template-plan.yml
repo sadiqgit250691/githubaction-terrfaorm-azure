@@ -32,7 +32,6 @@ on:
         description: 'Specifies the GitHub deployment environment.'
         required: false
         type: string
-        default: null
       tf_vars_file:
         description: 'Specifies the Terraform TFVARS file.'
         required: true
@@ -79,6 +78,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3.5.2
+
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+         creds: ${{ secrets.AZURE_CREDENTIALS }}
+
 
       - name: Scan IaC - tfsec
         if: ${{ inputs.ENABLE_TFSEC == 'true' }}
