@@ -1,0 +1,55 @@
+name: "Storage"
+on:
+  workflow_dispatch:
+
+jobs:
+  Plan_Dev:
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/templates/template-plan.yml@main
+    with:
+      path: terraform                   ## Path to terraform root module (Required)
+      tf_version: latest                 ## Terraform version e.g: 1.1.0 Default=latest (Optional)
+      az_resource_group: git-actions-rg      ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
+      az_storage_acc: gitactionstate    ## AZ backend - AZURE terraform backend storage acc (Required)
+      az_container_name: tfstatefile ## AZ backend - AZURE storage container hosting state files (Required)
+      tf_key: storage-dev                ## AZ backend - Specifies name that will be given to terraform state file and plan artifact (Required)
+      tf_vars_file: config-dev.tfvars    ## Terraform TFVARS (Required)
+      # enable_TFSEC: true                 ## (Optional)  Enable TFSEC IaC scans (Private repo requires GitHub enterprise)
+    secrets:
+      arm_client_id: ${{ secrets.ARM_CLIENT_ID }}             ## ARM Client ID 
+      arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}     ## ARM Client Secret
+      arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }} ## ARM Subscription ID
+      arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}             ## ARM Tenant ID
+  
+  Plan_Uat:
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/templates/template-plan.yml@main
+    with:
+      path: terraform
+      tf_version: latest
+      az_resource_group: git-actions-rg
+      az_storage_acc: gitactionstate
+      az_container_name: tfstatefile
+      tf_key: storage-uat
+      tf_vars_file: config-uat.tfvars
+      # enable_TFSEC: true                      
+    secrets:
+      arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
+      arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
+      arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
+
+  Plan_Prod:
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/templates/template-plan.yml@main
+    with:
+      path: terraform
+      tf_version: latest
+      az_resource_group: git-actions-rg
+      az_storage_acc: gitactionstate
+      az_container_name: tfstatefile
+      tf_key: storage-prod
+      tf_vars_file: config-prod.tfvars
+      # enable_TFSEC: true                       
+    secrets:
+      arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
+      arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
+      arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
