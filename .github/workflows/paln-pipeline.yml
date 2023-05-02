@@ -4,7 +4,7 @@ on:
 
 jobs:
   Plan_Dev:
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/templates/template-plan.yml@main
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@main
     with:
       path: terraform                   ## Path to terraform root module (Required)
       tf_version: latest                 ## Terraform version e.g: 1.1.0 Default=latest (Optional)
@@ -21,7 +21,7 @@ jobs:
       arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}             ## ARM Tenant ID
   
   Plan_Uat:
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/templates/template-plan.yml@main
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@main
     with:
       path: terraform
       tf_version: latest
@@ -38,7 +38,7 @@ jobs:
       arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
 
   Plan_Prod:
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/templates/template-plan.yml@main
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@main
     with:
       path: terraform
       tf_version: latest
