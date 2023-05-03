@@ -21,11 +21,10 @@ jobs:
       tf_vars_file: config-dev.tfvars    ## Terraform TFVARS (Required)
       # enable_TFSEC: true                 ## (Optional)  Enable TFSEC IaC scans (Private repo requires GitHub enterprise)
     secrets:
-      AZURE_AD_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}             ## ARM Client ID 
-      AZURE_AD_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}     ## ARM Client Secret
-      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }} ## ARM Subscription ID
-      AZURE_AD_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}             ## ARM Tenant ID
-      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      arm_client_id: ${{ secrets.AZURE_AD_CLIENT_ID }}             ## ARM Client ID 
+      arm_client_secret: ${{ secrets.AZURE_AD_CLIENT_SECRET }}     ## ARM Client Secret
+      arm_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }} ## ARM Subscription ID
+      arm_tenant_id: ${{ secrets.AZURE_AD_TENANT_ID }}             ## ARM Tenant ID
   
   Plan_Uat:
     uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@main
