@@ -10,6 +10,7 @@ on:
 
 jobs:
   Plan_Dev:
+    needs: Plan_Dev
     uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@main
     with:
       path: terraform                   ## Path to terraform root module (Required)
@@ -28,6 +29,7 @@ jobs:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
   
   Plan_Uat:
+    needs: [Plan_Dev, Plan_Uat]
     uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@main
     with:
       path: terraform
@@ -46,6 +48,7 @@ jobs:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
   Plan_Prod:
+    needs: [Plan_Uat, Plan_Prod ]
     uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@main
     with:
       path: terraform
