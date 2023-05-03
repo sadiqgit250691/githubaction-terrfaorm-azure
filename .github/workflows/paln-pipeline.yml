@@ -10,7 +10,7 @@ on:
 
 jobs:
   Plan_Dev:
-    needs: Plan_Dev
+    needs: [Plan_Dev]
     uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@main
     with:
       path: terraform                   ## Path to terraform root module (Required)
