@@ -11,7 +11,6 @@ on:
 
 jobs:
   Deploy_Dev:
-    needs: Plan_Dev
     uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@trunk
     with:
       path: terraform                   ## Path to terraform root module (Required)
