@@ -2,10 +2,10 @@ name: "Storage"
 on:
   push:
     branches:
-      - Kr-master
+      - trunk
   pull_request:
     branches:
-      - Kr-master
+      - trunk
   workflow_dispatch:
 
 
