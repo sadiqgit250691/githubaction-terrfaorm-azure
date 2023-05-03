@@ -2,15 +2,15 @@ name: "sdq-Storage"
 on:
   push:
     branches:
-      - main
+      - trunk
   pull_request:
     branches:
-      - main
+      - trunk
   workflow_dispatch:
 
 jobs:
   Plan_Dev:
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@main
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@trunk
     with:
       path: terraform                   ## Path to terraform root module (Required)
       tf_version: latest                 ## Terraform version e.g: 1.1.0 Default=latest (Optional)
@@ -29,7 +29,7 @@ jobs:
   
   Plan_Uat:
     needs: [Plan_Dev]
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@main
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@trunk
     with:
       path: terraform
       tf_version: latest
@@ -48,7 +48,7 @@ jobs:
 
   Plan_Prod:
     needs: [Plan_Dev, Plan_Uat]
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@main
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@trunk
     with:
       path: terraform
       tf_version: latest
