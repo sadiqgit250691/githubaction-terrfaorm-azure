@@ -42,16 +42,19 @@ on:
         type: boolean
         default: false
     secrets:
-      arm_client_id:
+      AZURE_AD_CLIENT_ID:
         description: 'Specifies the Azure ARM CLIENT ID.'
         required: true
-      arm_client_secret:
+      AZURE_AD_CLIENT_SECRET:
         description: 'Specifies the Azure ARM CLIENT SECRET.'
         required: true
-      arm_subscription_id:
+      AZURE_SUBSCRIPTION_ID:
         description: 'Specifies the Azure ARM SUBSCRIPTION ID.'
         required: true
-      arm_tenant_id:
+      AZURE_AD_TENANT_ID:
+        description: 'Specifies the Azure ARM TENANT ID.'
+        required: true
+      AZURE_CREDENTIALS:
         description: 'Specifies the Azure ARM TENANT ID.'
         required: true
 
