@@ -85,10 +85,6 @@ jobs:
         with:
           name: ${{ inputs.tf_key }}
           path: ${{ inputs.path }}
-          workflow: Build_TF_Plan
-          run_id: ${{ github.event.workflow_run.id }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Decompress TF Plan artifact
         run: unzip ${{ inputs.tf_key }}.zip
