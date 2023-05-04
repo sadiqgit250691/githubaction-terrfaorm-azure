@@ -2,13 +2,13 @@ name: "Storage"
 on:
   push:
     branches:
-      - Kr-master
+      - trunk
  
 
 
 jobs:
   Deploy_Dev:
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@Kr-master
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@trunk
     with:
       path: terraform                   ## Path to terraform root module (Required)
       tf_version: latest                 ## Terraform version e.g: 1.1.0 Default=latest (Optional)
@@ -26,7 +26,7 @@ jobs:
 
   Deploy_Uat:
     needs: [Deploy_Dev]
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@Kr-master
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@trunk
     with:
       path: terraform
       tf_version: latest
@@ -44,7 +44,7 @@ jobs:
 
   Deploy_Prod:
     needs: [Deploy_Dev, Deploy_Uat]
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@Kr-master
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@trunk
     with:
       path: terraform
       az_resource_group: git-actions-rg
