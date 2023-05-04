@@ -75,16 +75,16 @@ jobs:
       #   with:
       #    creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v3.1.2
         with:
          name: ${{ inputs.tf_key }}
-         path: ${{ inputs.path }}/${{ inputs.tf_key }}.tfstate
+         path: "${{ inputs.path }}/${{ inputs.tf_key }}.zip"
   
       - name: Download Artifact
         uses: actions/download-artifact@v3.0.2
         with:
           name: ${{ inputs.tf_key }}
-          path: ${{ inputs.path }}
+          path: "${{ inputs.path }}/${{ inputs.tf_key }}.zip"
 
       - name: Decompress TF Plan artifact
         run: unzip ${{ inputs.tf_key }}.zip
