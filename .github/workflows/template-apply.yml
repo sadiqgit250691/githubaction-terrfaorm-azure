@@ -84,7 +84,11 @@ jobs:
         uses: actions/download-artifact@v3.0.2
         with:
           name: ${{ inputs.tf_key }}
-          path: "${{ inputs.path }}/${{ inputs.tf_key }}.zip"
+          path: ${{ inputs.path }}
+          workflow: Build_TF_Plan
+          run_id: ${{ github.event.workflow_run.id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Decompress TF Plan artifact
         run: unzip ${{ inputs.tf_key }}.zip
