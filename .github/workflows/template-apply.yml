@@ -78,7 +78,7 @@ jobs:
         uses: actions/upload-artifact@v2.2.4
         with:
          name: ${{ inputs.tf_key }}
-         path: ${{ inputs.path }}
+         path: ${{ inputs.path }}/${{ inputs.tf_key }}.tfstate
   
       - name: Download Artifact
         uses: actions/download-artifact@v3.0.2
