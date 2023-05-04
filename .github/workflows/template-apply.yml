@@ -81,6 +81,7 @@ jobs:
       #    path: "${{ inputs.path }}/${{ inputs.tf_key }}.zip"
   
       - name: Download Artifact
+        continue-on-error: true
         uses: actions/download-artifact@v3.0.2
         with:
           name: ${{ inputs.tf_key }}
