@@ -74,7 +74,12 @@ jobs:
       #   uses: azure/login@v1
       #   with:
       #    creds: ${{ secrets.AZURE_CREDENTIALS }}
-         
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2.2.4
+        with:
+         name: ${{ inputs.tf_key }}
+         path: ${{ inputs.path }}
+  
       - name: Download Artifact
         uses: actions/download-artifact@v3.0.2
         with:
