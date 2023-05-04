@@ -8,6 +8,7 @@ on:
 
 jobs:
   Deploy_Dev:
+    needs: [Plan_Dev]
     uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@trunk
     with:
       path: ./terraform                   ## Path to terraform root module (Required)
@@ -25,7 +26,7 @@ jobs:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
   Deploy_Uat:
-    needs: [Deploy_Dev]
+    needs: [Plan_Uat, Deploy_Dev]
     uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@trunk
     with:
       path: ./terraform
@@ -43,7 +44,7 @@ jobs:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
   Deploy_Prod:
-    needs: [Deploy_Dev, Deploy_Uat]
+    needs: [Plan_Prod, Deploy_Dev, Deploy_Uat]
     uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@trunk
     with:
       path: ./terraform
