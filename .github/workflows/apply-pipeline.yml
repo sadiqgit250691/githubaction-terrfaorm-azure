@@ -2,16 +2,18 @@ name: "sdq-Storage"
 on:
   push:
     branches:
-      - Kr-master
+      - "!trunk"
+      - "Kr-master"
   pull_request:
     branches:
-      - Kr-master
+      - "!trunk"
+      - "Kr-master"
   workflow_dispatch:
 
 
 jobs:
   Plan_Dev:
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@trunk
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@Kr-master
     with:
       path: ./terraform                   ## Path to terraform root module (Required)
       tf_version: latest                 ## Terraform version e.g: 1.1.0 Default=latest (Optional)
@@ -29,7 +31,7 @@ jobs:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
   Deploy_Dev:
     needs: [Plan_Dev]
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@trunk
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@Kr-master
     with:
       path: ./terraform                   ## Path to terraform root module (Required)
       tf_version: latest                 ## Terraform version e.g: 1.1.0 Default=latest (Optional)
@@ -46,7 +48,7 @@ jobs:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
   Plan_Uat:
     needs: [Plan_Dev, Deploy_Dev]
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@trunk
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@Kr-master
     with:
       path: ./terraform
       tf_version: latest
@@ -64,7 +66,7 @@ jobs:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
   Deploy_Uat:
     needs: [Plan_Uat, Deploy_Dev]
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@trunk
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@Kr-master
     with:
       path: ./terraform
       tf_version: latest
@@ -81,7 +83,7 @@ jobs:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
   Plan_Prod:
     needs: [Plan_Dev, Plan_Uat, Deploy_Dev, Deploy_Uat]
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@trunk
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@Kr-master
     with:
       path: ./terraform
       tf_version: latest
@@ -99,7 +101,7 @@ jobs:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
   Deploy_Prod:
     needs: [Plan_Prod, Deploy_Dev, Deploy_Uat]
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@trunk
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@Kr-master
     with:
       path: ./terraform
       az_resource_group: git-actions-rg

@@ -4,7 +4,7 @@ location            = "East US"
 storage_config = [
   #V2 Storage
   {
-    name                      = "pwd9000v2prodsatest"
+    name                      = "pwd9000v2prod"
     account_kind              = "StorageV2"
     account_tier              = "Standard"
     account_replication_type  = "LRS"
@@ -15,7 +15,7 @@ storage_config = [
   },
   #ADLS2 Storage
   {
-    name                      = "pwd9000adls2prodsatest"
+    name                      = "pwd9000adls2pr"
     account_kind              = "BlockBlobStorage"
     account_tier              = "Premium"
     account_replication_type  = "ZRS"
