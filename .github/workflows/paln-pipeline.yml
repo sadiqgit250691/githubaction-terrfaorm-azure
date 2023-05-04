@@ -1,18 +1,18 @@
-name: "sdq-Storage"
+name: "Storage"
 on:
   push:
     branches:
-      - main
+      - trunk
   pull_request:
     branches:
-      - main
+      - trunk
   workflow_dispatch:
 
 jobs:
   Plan_Dev:
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@main
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@trunk
     with:
-      path: terraform                   ## Path to terraform root module (Required)
+      path: ./terraform                   ## Path to terraform root module (Required)
       tf_version: latest                 ## Terraform version e.g: 1.1.0 Default=latest (Optional)
       az_resource_group: git-actions-rg      ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
       az_storage_acc: gitactionstate    ## AZ backend - AZURE terraform backend storage acc (Required)
@@ -29,9 +29,9 @@ jobs:
   
   Plan_Uat:
     needs: [Plan_Dev]
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@main
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@trunk
     with:
-      path: terraform
+      path: ./terraform
       tf_version: latest
       az_resource_group: git-actions-rg
       az_storage_acc: gitactionstate
@@ -48,9 +48,9 @@ jobs:
 
   Plan_Prod:
     needs: [Plan_Dev, Plan_Uat]
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@main
+    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-plan.yml@trunk
     with:
-      path: terraform
+      path: ./terraform
       tf_version: latest
       az_resource_group: git-actions-rg
       az_storage_acc: gitactionstate
@@ -64,3 +64,5 @@ jobs:
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       AZURE_AD_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+  
+  
