@@ -5,7 +5,9 @@ on:
       - "Storage"
     types:
       - completed
- 
+  push:
+    branches:
+      - trunk
 
 
 jobs:
