@@ -1,4 +1,4 @@
-name: "sdq-Storage"
+name: "Storage"
 on:
   push:
     branches:
@@ -65,55 +65,4 @@ jobs:
       AZURE_AD_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
   
-  Deploy_Dev:
-    needs: [Plan_Dev]
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@trunk
-    with:
-      path: ./terraform                   ## Path to terraform root module (Required)
-      tf_version: latest                 ## Terraform version e.g: 1.1.0 Default=latest (Optional)
-      az_resource_group: git-actions-rg      ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
-      az_storage_acc: gitactionstate    ## AZ backend - AZURE terraform backend storage acc (Required)
-      az_container_name: tfstatefile ## AZ backend - AZURE storage container hosting state files (Required)
-      tf_key: storage-dev                ## AZ backend - Specifies name of the terraform state file and workflow artifact to download (Required)
-      gh_environment: Development        ## GH Environment. Default=null - (Optional)
-    secrets:
-      AZURE_AD_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}             ## ARM Client ID 
-      AZURE_AD_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}     ## ARM Client Secret
-      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }} ## ARM Subscription ID
-      AZURE_AD_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}             ## ARM Tenant ID
-      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
-
-  Deploy_Uat:
-    needs: [Plan_Uat, Deploy_Dev]
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@trunk
-    with:
-      path: ./terraform
-      tf_version: latest
-      az_resource_group: git-actions-rg
-      az_storage_acc: gitactionstate
-      az_container_name: tfstatefile
-      tf_key: storage-uat
-      gh_environment: UserAcceptanceTesting
-    secrets:
-      AZURE_AD_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
-      AZURE_AD_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
-      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      AZURE_AD_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
-      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
-
-  Deploy_Prod:
-    needs: [Plan_Prod, Deploy_Dev, Deploy_Uat]
-    uses: sadiqgit250691/githubaction-terrfaorm-azure/.github/workflows/template-apply.yml@trunk
-    with:
-      path: ./terraform
-      az_resource_group: git-actions-rg
-      az_storage_acc: gitactionstate
-      az_container_name: tfstatefile
-      tf_key: storage-prod
-      gh_environment: Production
-    secrets:
-      AZURE_AD_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
-      AZURE_AD_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
-      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      AZURE_AD_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
-      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+  
